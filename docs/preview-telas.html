@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="pt-br">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>Radar · Preview</title
+  ><style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #080e1b;
+      color: #eaf2ff;
+      font-family: Inter, Arial, sans-serif;
+    }
+    header {
+      padding: 24px 5%;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #283249;
+    }
+    header b {
+      color: #36e3b2;
+      font-size: 22px;
+    }
+    .lead {
+      text-align: center;
+      padding: 38px 12px 15px;
+    }
+    .lead h1 {
+      font-size: 35px;
+      margin: 0;
+    }
+    .lead p {
+      color: #94a7c2;
+    }
+    .screens {
+      display: flex;
+      gap: 25px;
+      overflow-x: auto;
+      padding: 30px 4% 70px;
+    }
+    .phone {
+      flex: 0 0 300px;
+      height: 650px;
+      border: 7px solid #303a51;
+      border-radius: 40px;
+      background: #0d1525;
+      box-shadow: 0 25px 50px #0007;
+      padding: 24px 17px;
+      position: relative;
+      overflow: hidden;
+    }
+    .status {
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .brand {
+      font-size: 18px;
+      color: #38e5b3;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+    .title {
+      font-size: 29px;
+      font-weight: 800;
+      margin: 17px 0 8px;
+    }
+    .sub {
+      color: #95a9c2;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+    .label {
+      font-size: 12px;
+      margin: 16px 0 8px;
+    }
+    .input,
+    .tile {
+      background: #18243a;
+      border: 1px solid #30405b;
+      border-radius: 13px;
+      padding: 15px;
+      color: #d4e0ef;
+      font-size: 13px;
+    }
+    .button {
+      background: #39e0b0;
+      color: #082018;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: 800;
+      margin-top: 20px;
+    }
+    .link {
+      color: #38e5b3;
+      text-align: center;
+      margin-top: 19px;
+      font-size: 13px;
+    }
+    .tile {
+      margin: 12px 0;
+      padding: 18px;
+    }
+    .tile strong {
+      display: block;
+      font-size: 23px;
+      margin: 8px 0;
+    }
+    .tiny {
+      font-size: 12px;
+      color: #9db0c9;
+    }
+    .chip {
+      display: inline-block;
+      background: #123d36;
+      color: #46e8b9;
+      padding: 6px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      margin: 7px 3px 0 0;
+    }
+    .nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #162238;
+      padding: 19px 10px;
+      text-align: center;
+      font-size: 12px;
+      color: #9cb1cc;
+    }
+    .nav b {
+      color: #38e5b3;
+    }
+    .alert {
+      border-left: 3px solid #38e5b3;
+    }
+    .screenlabel {
+      font-size: 11px;
+      color: #8da3c0;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+  </style>
+  <header><b>◉ RADAR</b><span>Prévia visual · telas ilustrativas</span></header>
+  <div class="lead">
+    <h1>Oportunidades no seu radar.</h1>
+    <p>
+      Conceito visual mobile — prévia estática, não é o aplicativo executável.
+    </p>
+  </div>
+  <div class="screens">
+    <section class="phone">
+      <div class="status">9:41 <span>●●● 100%</span></div>
+      <div class="brand">◉ RADAR</div>
+      <div class="title">Bem-vindo de volta</div>
+      <div class="sub">Não perca o próximo edital, vaga ou oportunidade.</div>
+      <div class="label">Seu e-mail</div>
+      <div class="input">voce@email.com</div>
+      <div class="label">Sua senha</div>
+      <div class="input">••••••••••••</div>
+      <div class="button">Entrar →</div>
+      <div class="link">Esqueci minha senha</div>
+      <div class="link">Criar conta grátis</div>
+    </section>
+    <section class="phone">
+      <div class="status">9:41 <span>●●● 100%</span></div>
+      <div class="screenlabel">INÍCIO / VISÃO GERAL</div>
+      <div class="title">Bom dia! 👋</div>
+      <div class="sub">Suas próximas oportunidades estão chegando.</div>
+      <div class="tile">
+        <div class="tiny">SEU PLANO</div>
+        <strong>Plano Básico</strong><span class="chip">A cada 6 horas</span
+        ><span class="chip">10 monitores</span>
+      </div>
+      <div class="tile">
+        <div class="tiny">OPORTUNIDADES ENCONTRADAS</div>
+        <strong>12</strong><span class="tiny">+3 nesta semana</span>
+      </div>
+      <div class="tile">
+        <div class="tiny">MONITORAMENTOS ATIVOS</div>
+        <strong>4 / 10</strong>
+      </div>
+      <div class="button">+ Criar novo alerta</div>
+      <div class="nav"><b>⌂ Início</b>　◉ Alertas　♧ Novidades　♙ Conta</div>
+    </section>
+    <section class="phone">
+      <div class="status">9:41 <span>●●● 100%</span></div>
+      <div class="screenlabel">NOVO MONITORAMENTO</div>
+      <div class="title">O que você busca?</div>
+      <div class="sub">Escolha uma fonte e nos diga o que procurar.</div>
+      <div class="label">Nome do alerta</div>
+      <div class="input">Mestrado em Computação</div>
+      <div class="label">Palavras ou frases</div>
+      <div class="input">inscrições abertas, edital, mestrado</div>
+      <span class="chip">inscrições abertas ×</span
+      ><span class="chip">edital ×</span>
+      <div class="label">Fonte de pesquisa</div>
+      <div class="input">https://faculdade.edu.br/editais</div>
+      <div class="label">Condição</div>
+      <div class="tile">
+        ◉ Qualquer expressão (OR)<br /><br />○ Todas as expressões (AND)
+      </div>
+      <div class="button">Ativar monitoramento</div>
+    </section>
+    <section class="phone">
+      <div class="status">9:41 <span>●●● 100%</span></div>
+      <div class="screenlabel">CENTRAL DE OPORTUNIDADES</div>
+      <div class="title">Novidades para você</div>
+      <div class="sub">
+        Encontramos novas publicações nas fontes acompanhadas.
+      </div>
+      <div class="tile alert">
+        <span class="chip">NOVO</span>
+        <div style="font-weight: 800; margin: 15px 0 8px">
+          Inscrições abertas — Pós-graduação
+        </div>
+        <div class="tiny">Publicação identificada na página monitorada.</div>
+        <div class="link" style="text-align: left">
+          Ver publicação original ↗
+        </div>
+      </div>
+      <div class="tile alert">
+        <span class="chip">EDITAL</span>
+        <div style="font-weight: 800; margin: 15px 0 8px">
+          Atualização de edital
+        </div>
+        <div class="tiny">Nova ocorrência dos termos cadastrados.</div>
+        <div class="link" style="text-align: left">Abrir fonte ↗</div>
+      </div>
+      <div class="nav">⌂ Início　◉ Alertas　<b>♧ Novidades</b>　♙ Conta</div>
+    </section>
+    <section class="phone">
+      <div class="status">9:41 <span>●●● 100%</span></div>
+      <div class="brand">◉ RADAR</div>
+      <div class="title">Recuperar acesso</div>
+      <div class="sub">
+        Esqueceu sua senha? Vamos enviar um link seguro para seu e-mail.
+      </div>
+      <div class="label">E-mail cadastrado</div>
+      <div class="input">voce@email.com</div>
+      <div class="button">Enviar link de recuperação</div>
+      <div class="link">← Voltar para login</div>
+    </section>
+  </div>
+</html>

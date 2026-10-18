@@ -1,0 +1,156 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Plan {
+  id                   String     @id
+  name                 String
+  intervalMinutes      Int
+  maxMonitors          Int
+  maxSourcesPerMonitor Int        @default(3)
+  cooldownMinutes      Int        @default(720)
+  users                UserPlan[]
+}
+
+model UserPlan {
+  userId    String   @id @db.Uuid
+  planId    String   @default("free")
+  plan      Plan     @relation(fields: [planId], references: [id])
+  updatedAt DateTime @updatedAt
+}
+
+model Monitor {
+  id              String              @id @default(uuid()) @db.Uuid
+  userId          String              @db.Uuid
+  name            String
+  keywords        String[]
+  excludeKeywords String[]            @default([])
+  matchMode       String              @default("ANY")
+  status          String              @default("ACTIVE")
+  nextCheckAt     DateTime            @default(now())
+  lastCheckedAt   DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  discovery       DiscoveryQuery?
+  temporal        TemporalPreference?
+  sources         Source[]
+  events          Detection[]
+
+  @@index([status, nextCheckAt])
+  @@index([userId])
+}
+
+model Source {
+  id        String    @id @default(uuid()) @db.Uuid
+  monitorId String    @db.Uuid
+  monitor   Monitor   @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+  url       String
+  lastHash  String?
+  lastText  String?   @db.Text
+  lastError String?
+  checkedAt DateTime?
+
+  @@unique([monitorId, url])
+}
+
+model Detection {
+  id              String         @id @default(uuid()) @db.Uuid
+  monitorId       String         @db.Uuid
+  monitor         Monitor        @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+  sourceId        String         @db.Uuid
+  fingerprint     String
+  title           String
+  snippet         String         @db.Text
+  url             String
+  createdAt       DateTime       @default(now())
+  publishedAt     DateTime?
+  sourceUpdatedAt DateTime?
+  dateConfidence  String         @default("UNKNOWN")
+  eventType       String         @default("NEW")
+  notifications   Notification[]
+
+  @@unique([monitorId, fingerprint])
+  @@index([monitorId, createdAt])
+}
+
+model Notification {
+  id          String    @id @default(uuid()) @db.Uuid
+  userId      String    @db.Uuid
+  detectionId String    @db.Uuid
+  detection   Detection @relation(fields: [detectionId], references: [id], onDelete: Cascade)
+  status      String    @default("PENDING")
+  sentAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@unique([userId, detectionId])
+  @@index([userId, createdAt])
+}
+
+model Device {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  expoToken String   @unique
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Feedback {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @db.Uuid
+  notificationId String   @db.Uuid
+  useful         Boolean
+  savedMoney     Float?
+  createdAt      DateTime @default(now())
+
+  @@unique([userId, notificationId])
+}
+
+model CatalogSource {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  category  String
+  url       String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([category, active])
+}
+
+model DiscoveryQuery {
+  id        String    @id @default(uuid()) @db.Uuid
+  monitorId String    @unique @db.Uuid
+  monitor   Monitor   @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+  query     String
+  lastRunAt DateTime?
+  lastError String?
+}
+
+model DiscoveredResult {
+  id          String   @id @default(uuid()) @db.Uuid
+  monitorId   String   @db.Uuid
+  urlHash     String
+  url         String   @db.Text
+  title       String
+  firstSeenAt DateTime @default(now())
+
+  @@unique([monitorId, urlHash])
+}
+
+model TemporalPreference {
+  monitorId           String    @id @db.Uuid
+  monitor             Monitor   @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+  dateBasis           String    @default("PUBLISHED")
+  lookbackDays        Int       @default(7)
+  since               DateTime?
+  onlyNew             Boolean   @default(true)
+  notifyUpdates       Boolean   @default(true)
+  requireVerifiedDate Boolean   @default(true)
+}

@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.expo/
+.serverless/
+dist/
+.aws/
+*.pem
+*.key
+*.p12
+*.log

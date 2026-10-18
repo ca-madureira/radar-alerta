@@ -1,0 +1,42 @@
+{
+  "name": "alertas-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "serverless offline",
+    "deploy": "serverless deploy",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "catalog:import": "tsx scripts/catalog-import.ts",
+    "db:deploy": "prisma migrate deploy",
+    "db:seed": "tsx --import dotenv/config prisma/seed.ts",
+    "test:integration": "tsx scripts/test-monitoring.ts",
+    "examples:postgraduate": "tsx scripts/setup-postgraduate.ts",
+    "format": "prettier --write src tests scripts prisma/seed.ts serverless.ts *.json",
+    "format:check": "prettier --check src tests scripts prisma/seed.ts serverless.ts *.json",
+    "type-check": "tsc --noEmit",
+    "check": "npm run format:check && npm run typecheck && npm test"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "@supabase/supabase-js": "^2.49.0",
+    "cheerio": "^1.0.0",
+    "jose": "^6.0.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.0",
+    "@types/node": "^22.0.0",
+    "dotenv": "^16.4.5",
+    "prettier": "^3.9.10",
+    "prisma": "^6.9.0",
+    "serverless": "^4.0.0",
+    "serverless-offline": "^14.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  }
+}
